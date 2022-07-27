@@ -1,0 +1,63 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 0.2em;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(black, red);
+}
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 2em);
+    grid-template-rows: minmax(2.5em, auto) repeat(5, 2em);
+    justify-content: center;
+    align-content: center;
+    gap: 2px;
+}
+
+.output {
+    background-color: rgba(255, 255, 255, 0.5);
+    grid-column: span 4;
+    padding: 0.2em 0.5em;
+    display: flex;
+    word-wrap: break-word;
+    word-break: break-all;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    border: 3px solid white;
+}
+
+.current-operation {
+    min-height: 1.2em;
+    font-size: 0.5em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.result {
+    min-height: 1.5em;
+    font-size: 1em;
+    color: white;
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.delete, .all-clear {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8rem;
+}
+
+.operation, .equals {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 0.9rem;
+}
