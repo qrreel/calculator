@@ -1,13 +1,13 @@
 class Calculator {
-    constructor(resultCell, outputCell) {
+    constructor(resultCell, prevOperandCell) {
         this.resultCell = resultCell
-        this.outputCell = outputCell
+        this.prevOperandCell = prevOperandCell
         this.clear()
     }
 
     clear() {
         this.result = ''
-        this.output = ''
+        this.prevOperand = ''
         this.operation = undefined
     }
 
@@ -28,19 +28,24 @@ class Calculator {
     }
 
     chooseOperation(operation) {
-        if(this.result === '') return
-        if(this.output !== '') {
+        if(this.result === '' && this.prevOperand !== '') {
+            this.operation = operation
             this.compute()
         }
+        if(this.prevOperand !== '') {
+            this.compute()
+        }
+        if(this.result === '') return
+        
         this.operation = operation
-        this.output = this.result
+        this.prevOperand = this.result
         this.result = ''
         this.overwright = false
     }
 
     compute() {
         let computation
-        const prev = parseFloat(this.output)
+        const prev = parseFloat(this.prevOperand)
         const next = parseFloat(this.result)
         if(isNaN(prev) || isNaN(next)) return
 
@@ -61,7 +66,7 @@ class Calculator {
                 return
         }
         this.result = computation
-        this.output = ''
+        this.prevOperand = ''
         this.operation = undefined
         this.overwright = true
     }
@@ -69,9 +74,9 @@ class Calculator {
     updateDisplay() {
         this.resultCell.innerText = this.result
         if(this.operation != null) {
-            this.outputCell.innerText = `${this.output} ${this.operation}`
+            this.prevOperandCell.innerText = `${this.prevOperand} ${this.operation}`
         } else {
-            this.outputCell.innerText = this.output
+            this.prevOperandCell.innerText = this.prevOperand
         }
     }
 }
@@ -81,10 +86,10 @@ const operationBtns = document.querySelectorAll('.operation')
 const equalsBtn = document.querySelector('.equals')
 const deleteBtn = document.querySelector('.delete')
 const allClearBtn = document.querySelector('.all-clear')
-const outputCell = document.querySelector('.current-operation')
+const prevOperandCell = document.querySelector('.current-operation')
 const resultCell = document.querySelector('.result')
 
-const calculator = new Calculator(resultCell, outputCell)
+const calculator = new Calculator(resultCell, prevOperandCell)
 
 numberBtns.forEach(button => {
     button.addEventListener('click', () => {
