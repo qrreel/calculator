@@ -12,14 +12,19 @@ class Calculator {
     }
 
     delete() {
-       this.result = this.result.toString().slice(0, -1) 
+       this.result = this.result.toString().slice(0, -1)
     }
 
     appendNumber(number) {
         if(number === '.' && this.result.includes('.')) return
         if(number === '0' && this.result === '0') return
+        if(this.overwright) {
+            this.result = ""
+            this.overwright = false
+        }
 
         this.result = this.result.toString() + number.toString()
+        
     }
 
     chooseOperation(operation) {
@@ -30,6 +35,7 @@ class Calculator {
         this.operation = operation
         this.output = this.result
         this.result = ''
+        this.overwright = false
     }
 
     compute() {
@@ -57,6 +63,7 @@ class Calculator {
         this.result = computation
         this.output = ''
         this.operation = undefined
+        this.overwright = true
     }
 
     updateDisplay() {
