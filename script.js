@@ -17,6 +17,8 @@ class Calculator {
 
     appendNumber(number) {
         if(number === '.' && this.result.includes('.')) return
+        if(number === '0' && this.result === '0') return
+
         this.result = this.result.toString() + number.toString()
     }
 
